@@ -44,7 +44,7 @@ describe('classi', function() {
 
         });
 
-        it('should', function(done) {
+        it('should add a classification if a match is found', function(done) {
             var log = [];
 
             var classification = {
@@ -66,6 +66,37 @@ describe('classi', function() {
 
             cStream.on('end', function() {
                 expect(log).to.deep.equal(['foo', 'foo']);
+                expect(classification.classify.args).to.deep.equal([
+                    ['fooPurpose'],
+                    ['barPurpose']
+                ]);
+
+                done();
+            });
+        });
+
+        it('should add nothing if no match is found', function(done) {
+            var log = [];
+
+            var classification = {
+                classify: sinon.spy(function() {
+                    return null;
+                })
+            };
+
+            var cStream = new ClassificationStream(classification);
+
+            cStream.write(createPosition('fooPurpose'));
+            cStream.write(createPosition('barPurpose'));
+
+            cStream.end();
+
+            cStream.on('data', function(position) {
+                log.push(position.classification());
+            });
+
+            cStream.on('end', function() {
+                expect(log).to.deep.equal([null, null]);
                 expect(classification.classify.args).to.deep.equal([
                     ['fooPurpose'],
                     ['barPurpose']

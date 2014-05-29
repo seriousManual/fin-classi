@@ -11,7 +11,7 @@
   "devDependencies": {
     "chai": "^1.9.1",
     "mocha": "^1.18.2",
-    "sinon": "~1.10.0"
+    "sinon": "^1.10.0"
   },
   "dependencies": {
     "fin-common": "git+https://zaphod1984@github.com/zaphod1984/fin-common.git"
