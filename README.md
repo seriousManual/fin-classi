@@ -1,0 +1,1 @@
+# fin-classi [![Build Status](https://travis-ci.org/zaphod1984/fin-classi.png)](https://travis-ci.org/zaphod1984/fin-classi)
